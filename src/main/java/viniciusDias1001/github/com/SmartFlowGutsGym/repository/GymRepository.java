@@ -9,4 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface GymRepository extends JpaRepository<Gym, UUID> {
+
+    boolean existsByNameIgnoreCase(String name);
 }

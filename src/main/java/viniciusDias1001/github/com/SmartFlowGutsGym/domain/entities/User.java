@@ -35,6 +35,10 @@ public class User {
     @NotBlank
     private String email;
 
+    @NotBlank
+    @Column(name = "password_hash", nullable = false, length = 255)
+    private String passwordHash;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private Role role;
@@ -42,6 +46,7 @@ public class User {
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
+
 
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = false)
