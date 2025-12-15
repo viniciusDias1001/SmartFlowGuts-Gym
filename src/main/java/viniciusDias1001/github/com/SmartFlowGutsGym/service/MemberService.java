@@ -14,7 +14,7 @@ public interface MemberService {
 
     MemberResponse getById(UUID gymId);
 
-    MemberResponse getByName(UUID gymId);
+    MemberResponse getByName(String nameMember);
 
     List<MemberResponse> listAll();
 

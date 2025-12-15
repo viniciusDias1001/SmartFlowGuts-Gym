@@ -16,4 +16,5 @@ public interface GymService {
     GymResponse update(UUID gymId, GymDTORequest request);
 
     void delete(UUID gymId);
+
 }
