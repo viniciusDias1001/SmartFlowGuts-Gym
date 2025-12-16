@@ -1,7 +1,4 @@
 package viniciusDias1001.github.com.SmartFlowGutsGym.service;
-
-import viniciusDias1001.github.com.SmartFlowGutsGym.domain.dto.GymDTORequest;
-import viniciusDias1001.github.com.SmartFlowGutsGym.domain.dto.GymResponse;
 import viniciusDias1001.github.com.SmartFlowGutsGym.domain.dto.MemberDTORequest;
 import viniciusDias1001.github.com.SmartFlowGutsGym.domain.dto.MemberResponse;
 

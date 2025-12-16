@@ -6,6 +6,5 @@ import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 public record MemberDTORequest(@NotNull UUID gymId,
-                               @NotBlank String externalCode,
                                @NotBlank String name) {
 }

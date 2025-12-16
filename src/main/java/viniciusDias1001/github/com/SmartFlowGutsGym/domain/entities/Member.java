@@ -32,9 +32,9 @@ public class Member {
     @JoinColumn(name = "gym_id", nullable = false)
     private Gym gym;
 
-    @NotBlank
-    @Column(name = "external_code", nullable = false, length = 40)
-    private String externalCode;
+
+    @Column(name = "external_code", nullable = false)
+    private Integer externalCode;
 
     @NotBlank
     private String name;

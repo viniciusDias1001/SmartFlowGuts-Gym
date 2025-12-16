@@ -10,4 +10,6 @@ import java.util.UUID;
 public interface MemberRepository extends JpaRepository<Member, UUID> {
 
     Member findByName(String name);
+
+    boolean existsByGymIdAndExternalCode(UUID gymId, Integer externalCode);
 }

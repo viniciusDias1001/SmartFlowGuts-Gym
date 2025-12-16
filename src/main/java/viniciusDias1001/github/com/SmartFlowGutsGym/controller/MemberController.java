@@ -23,7 +23,6 @@ public class MemberController {
         return memberService.create(memberDTORequest);
 
     }
-
     @GetMapping("/{memberId}")
     @ResponseStatus(HttpStatus.OK)
     public MemberResponse getGymById(@PathVariable UUID memberId){
@@ -34,6 +33,12 @@ public class MemberController {
     @ResponseStatus(HttpStatus.OK)
     public List<MemberResponse> listAll() {
         return memberService.listAll();
+    }
+
+    @GetMapping("/by-name")
+    @ResponseStatus(HttpStatus.OK)
+    public MemberResponse getByName(@RequestParam String name) {
+        return memberService.getByName(name);
     }
 
     @PutMapping("/{memberId}")

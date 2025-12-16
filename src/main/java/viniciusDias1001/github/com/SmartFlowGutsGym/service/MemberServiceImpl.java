@@ -9,12 +9,14 @@ import viniciusDias1001.github.com.SmartFlowGutsGym.domain.dto.MemberResponse;
 import viniciusDias1001.github.com.SmartFlowGutsGym.domain.entities.Gym;
 import viniciusDias1001.github.com.SmartFlowGutsGym.domain.entities.Member;
 import viniciusDias1001.github.com.SmartFlowGutsGym.domain.exceptions.BadRequestException;
+import viniciusDias1001.github.com.SmartFlowGutsGym.domain.exceptions.BusinessException;
 import viniciusDias1001.github.com.SmartFlowGutsGym.domain.exceptions.ResourceNotFoundException;
 import viniciusDias1001.github.com.SmartFlowGutsGym.repository.GymRepository;
 import viniciusDias1001.github.com.SmartFlowGutsGym.repository.MemberRepository;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Service
@@ -31,7 +33,7 @@ public class MemberServiceImpl  implements  MemberService{
         Member member = new Member();
         member.setGym(gym);
         member.setName(request.name());
-        member.setExternalCode(request.externalCode());
+        member.setExternalCode(generateExternalCode(request.gymId()));
         member.setCreatedAt(Instant.now());
         Member saved = memberRepository.save(member);
 
@@ -61,10 +63,7 @@ public class MemberServiceImpl  implements  MemberService{
         Member member = memberRepository.findById(memberID)
                 .orElseThrow(() -> new ResourceNotFoundException("Member not found: " + memberID));
         String newName = request.name().trim();
-
-        if (!member.getName().equalsIgnoreCase(newName)) {
-            throw new BadRequestException("This name already exist, try another one");
-        }
+        
 
         member.setName(newName);
 
@@ -86,5 +85,21 @@ public class MemberServiceImpl  implements  MemberService{
                 member.getExternalCode(),
                 member.getCreatedAt()
         );
+    }
+
+    private Integer generateExternalCode(UUID gymId) {
+        Random random = new Random();
+        Integer code;
+        int attempts = 0;
+
+        do {
+            code = 100000 + random.nextInt(900000); // 6 dígitos (melhor que 0-9999)
+            attempts++;
+            if (attempts > 20) {
+                throw new BusinessException("Could not generate external code. Try again.");
+            }
+        } while (memberRepository.existsByGymIdAndExternalCode(gymId, code));
+
+        return code;
     }
 }

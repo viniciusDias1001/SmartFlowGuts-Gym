@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public record MemberResponse(UUID id,
                              UUID gymId,
-                             String externalCode,
                              String name,
+                             Integer externalCode,
                              Instant createdAt) {
 }
